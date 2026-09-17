@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    url: ${TICKMEET_DB_URL:jdbc:mysql://127.0.0.1:3306/tickmeet?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC}
+    username: ${TICKMEET_DB_USER:tickmeet}
+    password: ${TICKMEET_DB_PASSWORD}
+  sql:
+    init:
+      schema-locations: classpath:schema-mysql.sql
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 7
+    timeout: 2s
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: ${TICKMEET_MQ_USER}
+    password: ${TICKMEET_MQ_PASSWORD}
+    virtual-host: /
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    listener:
+      simple:
+        auto-startup: true
+        prefetch: 10
+        concurrency: 2
+        retry:
+          enabled: true
+          initial-interval: 1000
+          max-attempts: 3
+        default-requeue-rejected: false
+tickmeet:
+  demo: ${TICKMEET_DEMO:false}
+  seed: ${TICKMEET_SEED:false}
+  callback-secret: ${TICKMEET_CALLBACK_SECRET:}
+management:
+  health:
+    redis:
+      enabled: true
+    rabbit:
+      enabled: true

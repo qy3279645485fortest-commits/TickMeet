@@ -1,0 +1,7 @@
+target/
+.data/
+.maven/
+*.log
+.env
+application-local.yml
+

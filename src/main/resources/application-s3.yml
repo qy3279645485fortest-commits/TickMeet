@@ -1,0 +1,8 @@
+tickmeet:
+  storage-provider: s3
+  s3:
+    endpoint: ${TICKMEET_S3_ENDPOINT}
+    access-key: ${TICKMEET_S3_ACCESS_KEY}
+    secret-key: ${TICKMEET_S3_SECRET_KEY}
+    bucket: ${TICKMEET_S3_BUCKET}
+    region: ${TICKMEET_S3_REGION:us-east-1}

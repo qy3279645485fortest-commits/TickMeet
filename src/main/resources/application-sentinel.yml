@@ -1,0 +1,7 @@
+# Connectivity configuration only; not proof of failover correctness.
+# Include alongside live. All advertised addresses must be reachable.
+spring:
+  redis:
+    sentinel:
+      master: ${TICKMEET_REDIS_MASTER:tickmeet-master}
+      nodes: ${TICKMEET_SENTINELS:127.0.0.1:26379,127.0.0.1:26380,127.0.0.1:26381}

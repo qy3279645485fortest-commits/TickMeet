@@ -1,0 +1,49 @@
+server:
+  port: 8088
+  address: 127.0.0.1
+spring:
+  profiles:
+    default: demo
+  jackson:
+    time-zone: Asia/Shanghai
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+  datasource:
+    url: jdbc:h2:file:./.data/tickmeet;MODE=MySQL;DATABASE_TO_LOWER=TRUE;AUTO_SERVER=FALSE
+    username: sa
+    password:
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql,classpath:catalog.sql,classpath:trade.sql,classpath:community.sql
+  rabbitmq:
+    listener:
+      simple:
+        auto-startup: false
+management:
+  server:
+    port: 9088
+    address: 127.0.0.1
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  endpoint:
+    health:
+      show-details: never
+  health:
+    redis:
+      enabled: false
+    rabbit:
+      enabled: false
+tickmeet:
+  demo: true
+  seed: true
+  token-seconds: 1800
+  payment-minutes: 15
+  reservation-seconds: 60
+  storage-root: .data/uploads
+  scheduling: true
+
